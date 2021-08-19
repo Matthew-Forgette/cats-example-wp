@@ -1,0 +1,1 @@
+<script>    var attnum = 1; </script>  <button type="button" onClick="attnum++">+</button> <h3><em>att<?php echo "$attnum" ?>: </em></h3>

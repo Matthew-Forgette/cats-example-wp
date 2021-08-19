@@ -1,0 +1,1 @@
+<?php echo 'the cake is a lie' ?><footer>the cake is a lie</footer>
