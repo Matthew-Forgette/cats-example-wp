@@ -20,6 +20,12 @@ body {
 .entry-title {
 	font-family: Pallete Mozaic;
 	position: fixed;
-	bottom: 20px;
-    margin: 20px;
+	bottom: 1em;
+	left: 50%;
+    margin: 1em;
+	text-align: center;
+}
+
+#page.site {
+	margin-bottom: 2em;
 }
