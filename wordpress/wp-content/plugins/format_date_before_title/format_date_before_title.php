@@ -10,18 +10,18 @@
  *
  * @link              https://matthew-forgette.netlify.app/
  * @since             1.0.0
- * @package           Cats_skills_test
+ * @package           Format_date_before_title
  *
  * @wordpress-plugin
- * Plugin Name:       Cats Skills Test Plugin
- * Plugin URI:        https://my-first-wordpress-app.lndo.site:4433/wp-content/plugins/cats_skills_test
+ * Plugin Name:       Format Date Before Title
+ * Plugin URI:        https://my-first-wordpress-app.lndo.site:4433/wp-content/plugins/format_date_before_title
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
  * Version:           1.0.0
  * Author:            Matthew Forgette
  * Author URI:        https://matthew-forgette.netlify.app/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       cats_skills_test
+ * Text Domain:       format_date_before_title
  * Domain Path:       /languages
  */
 
@@ -35,36 +35,36 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('CATS_SKILLS_TEST_VERSION', '1.0.0');
+define('FORMAT_DATE_BEFORE_TITLE_VERSION', '1.0.0');
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-cats_skills_test-activator.php
+ * This action is documented in includes/class-format_date_before_title-activator.php
  */
-function activate_cats_skills_test()
+function activate_format_date_before_title()
 {
-	require_once plugin_dir_path(__FILE__) . 'includes/class-cats_skills_test-activator.php';
-	Cats_skills_test_Activator::activate();
+	require_once plugin_dir_path(__FILE__) . 'includes/class-format_date_before_title-activator.php';
+	Format_date_before_title_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-cats_skills_test-deactivator.php
+ * This action is documented in includes/class-format_date_before_title-deactivator.php
  */
-function deactivate_cats_skills_test()
+function deactivate_format_date_before_title()
 {
-	require_once plugin_dir_path(__FILE__) . 'includes/class-cats_skills_test-deactivator.php';
-	Cats_skills_test_Deactivator::deactivate();
+	require_once plugin_dir_path(__FILE__) . 'includes/class-format_date_before_title-deactivator.php';
+	Format_date_before_title_Deactivator::deactivate();
 }
 
-register_activation_hook(__FILE__, 'activate_cats_skills_test');
-register_deactivation_hook(__FILE__, 'deactivate_cats_skills_test');
+register_activation_hook(__FILE__, 'activate_format_date_before_title');
+register_deactivation_hook(__FILE__, 'deactivate_format_date_before_title');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path(__FILE__) . 'includes/class-cats_skills_test.php';
+require plugin_dir_path(__FILE__) . 'includes/class-format_date_before_title.php';
 
 /**
  * Begins execution of the plugin.
@@ -75,32 +75,31 @@ require plugin_dir_path(__FILE__) . 'includes/class-cats_skills_test.php';
  *
  * @since    1.0.0
  */
-function run_cats_skills_test()
+function run_format_date_before_title()
 {
 
-	$plugin = new Cats_skills_test();
+	$plugin = new Format_date_before_title();
 	$plugin->run();
 }
-run_cats_skills_test();
+run_format_date_before_title();
 
 
-add_filter('the_content', 'add_cat_image_by_tag', 20);
+
+add_filter('the_title', 'format_date_before_title', 10, 2);
 /**
  * Add a icon to the beginning of every post page.
  *
  * @uses is_single() and has_tag
  */
-function add_cat_image_by_tag($content)
+function format_date_before_title($title)
 {
+	$date = get_the_date();
 
-	if (is_single() && has_tag('cat'))
-		// Add image to the beginning of each page
-		$content = sprintf(
-			'<img class="cat-img" src="wp-content/themes/twentytwentyone/assets/images/cats-skills-test-img.gif" alt="picture of cat" title=""',
-			get_bloginfo('stylesheet_directory'),
-			$content
-		);
-
-	// Returns the content.
-	return $content;
+	return $date . ' - ' . $title;
 }
+// add_filter('wp_title', 'append_to_title', 10, 3);
+// function append_to_title($title)
+// {
+// 	$date = get_the_date();
+// 	return $title .= " | " . $date;
+// }
